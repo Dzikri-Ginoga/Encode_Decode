@@ -1,6 +1,6 @@
 # Repository Structure
 
-Target layout for the modular monolith. Status as of DR 0001: index.html exists as stub, js/ and css/ are planned, README.md and ARCHITECTURE.md are planned.
+Target layout for the modular monolith. Status as of DR 0002: shell scaffolded, modern1 LFSR live, other menus are stubs, README.md and ARCHITECTURE.md are planned.
 
 ```text
 KriptoHengker/
