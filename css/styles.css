@@ -15,7 +15,7 @@ body { background: var(--surface-page); }
   font-size: 1.2rem; flex-shrink: 0;
 }
 .brand-text { display: flex; flex-direction: column; line-height: 1.2; flex: 1; min-width: 0; }
-.brand-text strong { font-family: var(--font-serif); font-size: 1.05rem; }
+.brand-text strong { font-family: var(--font-sans); font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em; }
 .brand-text small { color: var(--text-muted); font-size: 0.72rem; }
 .collapse-btn {
   display: flex; align-items: center; gap: var(--space-2);
@@ -57,9 +57,9 @@ body { background: var(--surface-page); }
   border-radius: var(--radius-md); padding: var(--card-padding);
   margin-bottom: var(--space-section); box-shadow: var(--shadow-card);
 }
-.card h2 { font-family: var(--font-serif); font-size: var(--type-title-size); line-height: var(--type-title-lh); margin: 0 0 var(--space-2); }
+.card h2 { font-family: var(--font-sans); font-size: var(--type-title-size); line-height: var(--type-title-lh); font-weight: 700; letter-spacing: -0.01em; margin: 0 0 var(--space-2); }
 .card p.lead, .lead { color: var(--text-body); font-size: var(--type-body-size); line-height: var(--type-body-lh); }
-.display { font-family: var(--font-serif); font-size: var(--type-display-size); line-height: var(--type-display-lh); letter-spacing: -0.01em; margin: 0 0 var(--space-2); }
+.display { font-family: var(--font-sans); font-size: var(--type-display-size); line-height: var(--type-display-lh); letter-spacing: -0.02em; font-weight: 700; margin: 0 0 var(--space-2); }
 
 .f-label { display: block; margin-top: var(--space-4); }
 .f-label > span { display: block; font-size: var(--type-label-size); font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-2); }
@@ -137,7 +137,7 @@ body { background: var(--surface-page); }
 }
 .menu-card:hover { border-color: var(--action-accent); }
 .menu-card i { font-size: 1.3rem; color: var(--action-accent); }
-.menu-card h3 { font-family: var(--font-serif); font-size: 1rem; margin: var(--space-2) 0 var(--space-1); }
+.menu-card h3 { font-family: var(--font-sans); font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em; margin: var(--space-2) 0 var(--space-1); }
 .menu-card p { font-size: 0.8rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
 .badge { display: inline-block; margin-top: var(--space-3); font-size: 0.68rem; font-weight: 600; padding: 0.1rem 0.55rem; border-radius: var(--radius-full); }
 .badge.live { background: var(--action-accent-wash); color: var(--action-accent); border: 1px solid var(--action-accent); }
