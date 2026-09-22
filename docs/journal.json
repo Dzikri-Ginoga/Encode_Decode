@@ -25,6 +25,14 @@
       "action": "MODERN1_LFSR_PAGES",
       "description": "Scaffolded 5-tab shell, implemented modern1 LFSR with configurable taps, stubbed other menus, added Pages headers and 404.",
       "related_dr": "0002"
+    },
+    {
+      "id": 4,
+      "timestamp": "2026-09-22T00:00:00Z",
+      "author": "agent",
+      "action": "UI_KIT_TAILWIND_ICONOIR",
+      "description": "Added Tailwind CDN, Iconoir, fonts, shared components kit, hash router with home landing, Menu 3 stepper and bit grid.",
+      "related_dr": "0003"
     }
   ]
 }

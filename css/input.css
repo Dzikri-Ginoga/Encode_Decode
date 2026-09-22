@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, monospace;
+  --color-abyss: #0b1220;
+  --color-panel: #141d33;
+  --color-accent: #22d3ee;
+  --color-gold: #fbbf24;
+}
+
+/* Prod build input. Dev uses the Play CDN; prod compiles this file to
+   css/tailwind.css via the Tailwind CLI and index.html swaps to it. */

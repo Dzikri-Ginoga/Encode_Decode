@@ -22,8 +22,10 @@ export function decrypt(input, key) { /* return { result, steps } */ }
 - Add JSDoc types on all exports. Cross-check cipher math against lecture spec, do not assume shifts, directions, or sizes.
 
 ## Constraints
-- Vanilla ES2022 browser modules only. Do not add bundlers or npm runtime deps.
-- No emojis anywhere. Use ASCII hyphen `-` only, never em/en dashes. No Lucide or third-party icon libs, use CSS or ASCII.
+- Cipher math stays vanilla ES2022 browser modules, no bundlers or npm runtime deps for logic.
+- Styling exception (DR 0003): Tailwind v4 browser CDN + Iconoir CSS + Google Fonts allowed. No Lucide. Dev uses Play CDN; prod compiles `css/input.css` to `css/tailwind.css` via Tailwind CLI at deploy time.
+- Shared UI kit lives in `js/shared/components.js`. All views must consume it, no duplicated panel HTML.
+- No emojis anywhere. Use ASCII hyphen `-` only, never em/en dashes.
 
 ## Docs Ops
 - Decision records: `docs/NNNN-title-DD-mon-YYYY.md`, must start with `## Meta` block. See `docs/0000-template-22-Sep-2026.md`.
