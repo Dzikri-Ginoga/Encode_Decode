@@ -1,21 +1,23 @@
 /**
  * Shared UI kit. DOM helpers only, no cipher math.
- * Tailwind classes + Iconoir icons. All views consume this.
+ * Solid light theme. All views consume this.
  * @module shared/components
  */
 import { renderSteps } from "./utils.js";
 
 /**
- * Wrap content in a glass panel section.
- * @param {string} title - panel heading
- * @param {string} icon - iconoir class suffix, e.g. "lock"
+ * Wrap content in a solid card.
+ * @param {string} no - section number, e.g. "01"
+ * @param {string} title - heading
+ * @param {string} icon - iconoir class suffix
  * @param {string} body - inner HTML
  * @returns {string} section HTML
  */
-export function panel(title, icon, body) {
+export function panel(no, title, icon, body) {
   return `
-  <section class="rounded-2xl border border-white/10 bg-panel/80 backdrop-blur p-5 mb-5 shadow-xl shadow-black/30">
-    <h2 class="text-lg font-bold flex items-center gap-2 mb-1"><i class="iconoir-${icon} text-accent"></i>${title}</h2>
+  <section class="card">
+    <p class="sec-no">${no}</p>
+    <h2><i class="iconoir-${icon}"></i>${title}</h2>
     ${body}
   </section>`;
 }
@@ -29,26 +31,21 @@ export function panel(title, icon, body) {
  */
 export function field(label, input, hint = "") {
   return `
-  <label class="block mt-4">
-    <span class="text-xs uppercase tracking-wider text-slate-400">${label}</span>
+  <label class="f-label">
+    <span>${label}</span>
     ${input}
-    ${hint ? `<span class="block text-xs text-slate-500 mt-1">${hint}</span>` : ""}
+    ${hint ? `<span class="f-hint">${hint}</span>` : ""}
   </label>`;
 }
 
 export const textInput = (id, val = "", ph = "") =>
-  `<input id="${id}" type="text" value="${val}" placeholder="${ph}"
-    class="mt-1 w-full rounded-lg bg-abyss border border-white/10 px-3 py-2 font-mono text-sm focus:outline-none focus:border-accent">`;
+  `<input id="${id}" type="text" value="${val}" placeholder="${ph}" class="f-input">`;
 
 export const textArea = (id, ph = "") =>
-  `<textarea id="${id}" rows="3" placeholder="${ph}"
-    class="mt-1 w-full rounded-lg bg-abyss border border-white/10 px-3 py-2 font-mono text-sm focus:outline-none focus:border-accent"></textarea>`;
+  `<textarea id="${id}" rows="3" placeholder="${ph}" class="f-area"></textarea>`;
 
 export const btn = (id, icon, label, primary = true) =>
-  `<button id="${id}" class="${primary
-    ? "bg-accent text-slate-950 font-bold"
-    : "bg-white/5 text-slate-200 border border-white/10"} rounded-lg px-4 py-2 text-sm flex items-center gap-2 hover:opacity-90 active:scale-95 transition">
-    <i class="iconoir-${icon}"></i>${label}</button>`;
+  `<button id="${id}" class="${primary ? "btn-solid" : "btn-plain"}"><i class="iconoir-${icon}"></i>${label}</button>`;
 
 /**
  * Bit grid with tap highlights for LFSR seed display.
@@ -59,7 +56,7 @@ export const btn = (id, icon, label, primary = true) =>
 export function bitGrid(bits, taps = []) {
   return `<div class="flex flex-wrap gap-1.5 mt-2" role="img" aria-label="seed ${bits}">` +
     [...bits].map((b, i) =>
-      `<span class="bit-cell ${taps.includes(i) ? "tap" : ""} ${b === "1" ? "on" : ""}" title="pos ${i}${taps.includes(i) ? " (tap)" : ""}">${b}</span>`
+      `<span class="bit-cell ${taps.includes(i) ? "tap" : ""} ${b === "1" ? "on" : ""}" title="posisi ${i}${taps.includes(i) ? " (tap)" : ""}">${b}</span>`
     ).join("") + `</div>`;
 }
 
@@ -73,11 +70,12 @@ export function bitGrid(bits, taps = []) {
 export function wireCopy(scope, btnId, outId) {
   const b = scope.querySelector("#" + btnId);
   if (!b) return;
+  const original = b.innerHTML;
   b.onclick = async () => {
     const t = scope.querySelector("#" + outId)?.textContent ?? "";
-    try { await navigator.clipboard.writeText(t); b.innerHTML = `<i class="iconoir-check"></i>Copied`; }
-    catch { b.innerHTML = `<i class="iconoir-warning-triangle"></i>Copy failed`; }
-    setTimeout(() => { b.innerHTML = `<i class="iconoir-copy"></i>Copy`; }, 1200);
+    try { await navigator.clipboard.writeText(t); b.innerHTML = `<i class="iconoir-check"></i>Disalin`; }
+    catch { b.innerHTML = `<i class="iconoir-warning-triangle"></i>Gagal menyalin`; }
+    setTimeout(() => { b.innerHTML = original; }, 1200);
   };
 }
 
@@ -91,11 +89,11 @@ export function renderStepper(el, steps) {
   let idx = steps.length - 1;
   const draw = () => {
     el.innerHTML = `
-      <div class="flex items-center gap-2 mb-3">
-        <button id="st-prev" class="rounded-lg bg-white/5 border border-white/10 px-3 py-1.5 text-sm hover:border-accent"><i class="iconoir-arrow-left"></i></button>
-        <span class="text-xs text-slate-400 font-mono">step ${steps.length ? idx + 1 : 0} / ${steps.length}</span>
-        <button id="st-next" class="rounded-lg bg-white/5 border border-white/10 px-3 py-1.5 text-sm hover:border-accent"><i class="iconoir-arrow-right"></i></button>
-        <button id="st-all" class="ml-auto text-xs text-slate-400 underline">show all</button>
+      <div class="stepbar">
+        <button id="st-prev" class="btn-plain" aria-label="Langkah sebelumnya"><i class="iconoir-arrow-left"></i></button>
+        <span class="pos">Langkah ${steps.length ? idx + 1 : 0} / ${steps.length}</span>
+        <button id="st-next" class="btn-plain" aria-label="Langkah berikut"><i class="iconoir-arrow-right"></i></button>
+        <button id="st-all" class="link">Tampilkan semua</button>
       </div>
       <div class="trace"></div>`;
     const box = el.querySelector(".trace");
@@ -117,7 +115,7 @@ export function renderStepper(el, steps) {
  * @returns {string} HTML
  */
 export function placeholder(menu, owner) {
-  return panel(menu, "hammer",
-    `<p class="text-sm text-slate-400 flex items-center gap-2"><i class="iconoir-user"></i>${owner}</p>
-     <p class="text-xs text-slate-500 mt-2">Stub implements the module contract so the shell keeps working. Owner replaces cipher.js and view Tool section.</p>`);
+  return panel("00", menu, "hammer",
+    `<p class="lead"><i class="iconoir-user"></i> ${owner}</p>
+     <p class="f-hint">Bagian ini menunggu implementasi pemiliknya. Struktur halaman sudah siap.</p>`);
 }

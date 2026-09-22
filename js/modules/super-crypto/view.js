@@ -2,27 +2,27 @@ import { encryptPipeline, decryptPipeline } from "./pipeline.js";
 import { panel, field, textInput, textArea, btn, wireCopy, renderStepper } from "../../shared/components.js";
 
 /**
- * Render Super Encryption tab on the shared kit.
+ * Render Menu 5 Super Enkripsi on the shared kit.
  * @param {HTMLElement} root - container
  * @returns {void}
  */
 export function renderSuper(root) {
   root.innerHTML =
-    panel("Menu 5 - Super Encryption", "layers", `
-      <p class="text-sm text-slate-400">Chains Classic1 -&gt; Classic2 -&gt; LFSR -&gt; Modern2. Only the LFSR stage is live.</p>
-      ${field("Input", textArea("s-in", "Plaintext for chain encrypt"))}
+    panel("01", "Menu 5 - Super Enkripsi", "layers", `
+      <p class="lead">Merangkai Klasik 1 - Klasik 2 - LFSR - Modern 2. Tahap yang aktif saat ini hanya LFSR.</p>
+      ${field("Masukan", textArea("s-in", "Teks biasa untuk enkripsi berantai"))}
       <div class="grid sm:grid-cols-2 gap-4">
-        ${field("LFSR seed", textInput("s-seed", "1011"))}
-        ${field("LFSR taps", textInput("s-taps", "0,2"))}
+        ${field("Seed LFSR", textInput("s-seed", "1011"))}
+        ${field("Tap LFSR", textInput("s-taps", "0,2"))}
       </div>
-      <div class="flex flex-wrap gap-2 mt-4">
-        ${btn("s-enc", "layers", "Encrypt chain")}
-        ${btn("s-dec", "refresh", "Decrypt chain", false)}
+      <div class="btn-row">
+        ${btn("s-enc", "layers", "Enkripsi berantai")}
+        ${btn("s-dec", "refresh", "Dekripsi berantai", false)}
       </div>`) +
-    panel("Output", "terminal", `
-      <div class="output font-mono text-sm text-accent" id="s-out">-</div>
-      <div class="mt-2">${btn("s-copy", "copy", "Copy", false)}</div>`) +
-    panel("Aggregated trace", "list", `<div id="s-trace"></div>`);
+    panel("02", "Keluaran", "terminal", `
+      <div class="output font-mono text-sm" id="s-out">-</div>
+      <div class="btn-row">${btn("s-copy", "copy", "Salin", false)}</div>`) +
+    panel("03", "Jejak gabungan", "list", `<div id="s-trace"></div>`);
 
   const keys = () => ({
     classic1: {}, classic2: {}, modern2: {},
@@ -35,9 +35,9 @@ export function renderSuper(root) {
     const out = root.querySelector("#s-out");
     try {
       const r = fn(root.querySelector("#s-in").value, keys());
-      out.textContent = r.result === "" ? "(empty)" : r.result;
+      out.textContent = r.result === "" ? "(kosong)" : r.result;
       renderStepper(root.querySelector("#s-trace"), r.steps);
-    } catch (err) { out.textContent = "Error: " + err.message; }
+    } catch (err) { out.textContent = "Galat: " + err.message; }
   };
   root.querySelector("#s-enc").onclick = () => run(encryptPipeline);
   root.querySelector("#s-dec").onclick = () => run(decryptPipeline);

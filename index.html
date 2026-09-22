@@ -1,43 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KriptoHengker - Crypto Demo</title>
+  <title>KriptoHengker - Laboratorium Kriptografi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/iconoir-icons/iconoir@main/css/iconoir.css">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <link rel="stylesheet" href="css/styles.css">
   <style type="text/tailwindcss">
     @theme {
-      --font-sans: "Space Grotesk", system-ui, sans-serif;
+      --font-sans: "Inter", system-ui, sans-serif;
+      --font-serif: "Source Serif 4", Georgia, serif;
       --font-mono: "JetBrains Mono", Consolas, monospace;
-      --color-abyss: #0b1220;
-      --color-panel: #141d33;
-      --color-accent: #22d3ee;
-      --color-gold: #fbbf24;
+      --color-cream: #FAF6EF;
+      --color-card: #FFFFFF;
+      --color-ink: #1C1917;
+      --color-muted: #78716C;
+      --color-line: #E7E0D3;
+      --color-teal: #0F766E;
+      --color-amber: #B45309;
     }
   </style>
 </head>
-<body class="bg-abyss text-slate-200 font-sans min-h-screen">
-  <header class="border-b border-white/10 bg-panel/80 backdrop-blur sticky top-0 z-10">
-    <div class="max-w-6xl mx-auto px-6 py-5">
-      <div class="flex items-center gap-3">
-        <i class="iconoir-lock text-2xl text-accent"></i>
-        <div>
-          <h1 class="text-2xl font-bold tracking-tight">KriptoHengker</h1>
-          <p class="text-sm text-slate-400">Classical and modern cipher demo with step trace. All computation runs in the browser.</p>
-        </div>
+<body class="bg-cream text-ink font-sans min-h-screen">
+  <div id="shell" class="flex min-h-screen">
+    <aside id="sidebar" class="sidebar" aria-label="Navigasi utama">
+      <div class="flex items-center gap-2 px-4 pt-5 pb-4">
+        <span class="brand-mark"><i class="iconoir-lock"></i></span>
+        <span class="brand-text">
+          <strong>KriptoHengker</strong>
+          <small>Lab Kriptografi</small>
+        </span>
+        <button id="collapse" class="collapse-btn" aria-label="Lipatkan navigasi"><i class="iconoir-nav-arrow-left"></i></button>
       </div>
-      <nav id="tabs" aria-label="Cipher menus" class="flex flex-wrap gap-2 mt-4"></nav>
+      <nav id="tabs" class="px-3 space-y-1" aria-label="Menu sandi"></nav>
+      <p class="side-note"><i class="iconoir-shield-check"></i><span>Semua hitungan berjalan di peramban.</span></p>
+    </aside>
+    <div class="flex-1 min-w-0">
+      <main id="app" aria-live="polite" class="content"></main>
+      <footer class="content-footer">Demo pembelajaran. Implementasi jejak langkah untuk belajar, bukan untuk kerahasiaan produksi.</footer>
     </div>
-  </header>
-  <main id="app" aria-live="polite" class="max-w-6xl mx-auto px-6 py-8"></main>
-  <footer class="max-w-6xl mx-auto px-6 pb-10 text-xs text-slate-500">
-    <i class="iconoir-shield-check"></i> Educational demo. Step-trace implementations are for learning, not production secrecy.
-  </footer>
+  </div>
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

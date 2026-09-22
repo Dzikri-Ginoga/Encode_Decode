@@ -3,30 +3,30 @@ import { isBinary } from "../../shared/utils.js";
 import { panel, field, textInput, textArea, btn, bitGrid, wireCopy, renderStepper } from "../../shared/components.js";
 
 /**
- * Render Modern1 LFSR tab on the shared kit.
+ * Render Menu 3 LFSR tab on the shared kit.
  * @param {HTMLElement} root - container
  * @returns {void}
  */
 export function renderModern1(root) {
   root.innerHTML =
-    panel("Menu 3 - LFSR Stream Cipher", "lock", `
-      <p class="text-sm text-slate-400">Fibonacci LFSR, shift-right, MSB feedback = XOR of taps (0-based from left). Example: seed <span class="font-mono text-accent">1011</span>, taps <span class="font-mono text-accent">0,2</span>.</p>
-      ${field("Input", textArea("m1-in", "Plaintext for encrypt, cipher bits for decrypt"))}
+    panel("01", "Menu 3 - Aliran LFSR", "lock", `
+      <p class="lead">LFSR Fibonacci, geser ke kanan, umpan balik dari XOR seluruh tap (indeks 0 dari kiri). Contoh: seed <span class="font-mono">1011</span>, tap <span class="font-mono">0,2</span>.</p>
+      ${field("Masukan", textArea("m1-in", "Teks biasa untuk enkripsi, deretan bit untuk dekripsi"))}
       <div class="grid sm:grid-cols-2 gap-4">
-        ${field("Seed (binary)", textInput("m1-seed", "1011"), "2-32 bits, not all zeros.")}
-        ${field("Taps (comma separated)", textInput("m1-taps", "0,2"), "0-based from left.")}
+        ${field("Seed (biner)", textInput("m1-seed", "1011"), "Panjang 2-32 bit, tidak boleh nol semua.")}
+        ${field("Tap (pisahkan koma)", textInput("m1-taps", "0,2"), "Indeks 0 dari kiri.")}
       </div>
       <div id="m1-grid"></div>
-      <div class="flex flex-wrap gap-2 mt-4">
-        ${btn("m1-enc", "lock", "Encrypt")}
-        ${btn("m1-dec", "unlock", "Decrypt", false)}
+      <div class="btn-row">
+        ${btn("m1-enc", "lock", "Enkripsi")}
+        ${btn("m1-dec", "unlock", "Dekripsi", false)}
       </div>`) +
-    panel("Output", "terminal", `
-      <div class="output font-mono text-sm text-accent" id="m1-out">-</div>
-      <div class="mt-2">${btn("m1-copy", "copy", "Copy", false)}</div>`) +
-    panel("Step trace", "list", `<div id="m1-trace"></div>`) +
-    panel("About this cipher", "book", `
-      <p class="text-sm text-slate-400">Each plaintext char becomes 8 bits. The LFSR emits one keystream bit per step from its rightmost cell, then shifts right and feeds back the XOR of tap cells into the left. Cipher bit = plain XOR key. Decryption repeats the same stream, so the same seed and taps recover the text.</p>`);
+    panel("02", "Keluaran", "terminal", `
+      <div class="output font-mono text-sm" id="m1-out">-</div>
+      <div class="btn-row">${btn("m1-copy", "copy", "Salin", false)}</div>`) +
+    panel("03", "Jejak langkah", "list", `<div id="m1-trace"></div>`) +
+    panel("04", "Tentang sandi ini", "book", `
+      <p class="lead">Setiap karakter diubah menjadi 8 bit. LFSR mengeluarkan satu bit keystream dari sel paling kanan, lalu bergeser dan mengisi sel kiri dengan XOR dari sel-sel tap. Bit sandi = bit biasa XOR keystream. Dekripsi mengulang aliran yang sama, jadi seed dan tap yang sama mengembalikan teks asal.</p>`);
 
   const parseTaps = (s) => s.split(",").map((x) => x.trim()).filter((x) => x !== "").map(Number);
   const paintGrid = () => {
@@ -47,10 +47,10 @@ export function renderModern1(root) {
         seed: root.querySelector("#m1-seed").value.trim(),
         taps: parseTaps(root.querySelector("#m1-taps").value)
       });
-      out.textContent = r.result === "" ? "(empty)" : r.result;
+      out.textContent = r.result === "" ? "(kosong)" : r.result;
       renderStepper(trace, r.steps);
     } catch (err) {
-      out.textContent = "Error: " + err.message;
+      out.textContent = "Galat: " + err.message;
       trace.innerHTML = "";
     }
   };

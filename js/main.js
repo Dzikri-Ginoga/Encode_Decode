@@ -6,22 +6,28 @@ import { renderModern2 } from "./modules/modern2/view.js";
 import { renderSuper } from "./modules/super-crypto/view.js";
 
 const routes = {
-  home: { render: renderHome, label: "Home", icon: "home" },
-  classic1: { render: renderClassic1, label: "Menu 1 - Classic 1", icon: "key" },
-  classic2: { render: renderClassic2, label: "Menu 2 - Classic 2", icon: "key" },
-  modern1: { render: renderModern1, label: "Menu 3 - LFSR Stream", icon: "lock" },
-  modern2: { render: renderModern2, label: "Menu 4 - Modern 2", icon: "cpu" },
-  super: { render: renderSuper, label: "Menu 5 - Super Encrypt", icon: "layers" }
+  home: { render: renderHome, label: "Beranda", icon: "home", live: true },
+  classic1: { render: renderClassic1, label: "Menu 1 - Klasik 1", icon: "key", live: false },
+  classic2: { render: renderClassic2, label: "Menu 2 - Klasik 2", icon: "key", live: false },
+  modern1: { render: renderModern1, label: "Menu 3 - Aliran LFSR", icon: "lock", live: true },
+  modern2: { render: renderModern2, label: "Menu 4 - Modern 2", icon: "cpu", live: false },
+  super: { render: renderSuper, label: "Menu 5 - Super Enkripsi", icon: "layers", live: true }
 };
 
 const app = document.getElementById("app");
 const tabs = document.getElementById("tabs");
+const shell = document.getElementById("shell");
 
 tabs.innerHTML = Object.entries(routes)
-  .map(([k, r]) => `<a href="#/${k}" data-route="${k}"
-    class="rounded-lg px-3 py-2 text-sm border border-white/10 bg-white/5 flex items-center gap-2 hover:border-accent transition">
-    <i class="iconoir-${r.icon}"></i>${r.label}</a>`)
+  .map(([k, r]) => `<a href="#/${k}" data-route="${k}" title="${r.label}">
+    <i class="iconoir-${r.icon}"></i><span class="lbl">${r.label}</span><span class="dot ${r.live ? "live" : ""}"></span></a>`)
   .join("");
+
+document.getElementById("collapse").onclick = () => {
+  const collapsed = shell.classList.toggle("collapsed");
+  document.querySelector("#collapse i").className =
+    collapsed ? "iconoir-nav-arrow-right" : "iconoir-nav-arrow-left";
+};
 
 function current() {
   const h = location.hash.replace("#/", "");
@@ -31,14 +37,12 @@ function current() {
 function render() {
   const name = current();
   tabs.querySelectorAll("a").forEach((a) => {
-    const on = a.dataset.route === name;
-    a.classList.toggle("border-accent", on);
-    a.classList.toggle("text-accent", on);
+    a.classList.toggle("active", a.dataset.route === name);
   });
   app.innerHTML = "";
   routes[name].render(app);
 }
 
 window.addEventListener("hashchange", render);
-if (!location.hash) location.hash = "#/modern1";
+if (!location.hash) location.hash = "#/home";
 render();

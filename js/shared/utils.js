@@ -19,7 +19,7 @@ export function textToBits(text) {
  */
 export function bitsToText(bits) {
   if (bits.length === 0) return "";
-  if (bits.length % 8 !== 0) throw new Error("Bit length must be multiple of 8.");
+  if (bits.length % 8 !== 0) throw new Error("Panjang bit harus kelipatan 8.");
   let out = "";
   for (let i = 0; i < bits.length; i += 8) {
     out += String.fromCharCode(parseInt(bits.slice(i, i + 8), 2));
@@ -34,7 +34,7 @@ export function bitsToText(bits) {
  * @returns {string} XOR result
  */
 export function xorBits(a, b) {
-  if (a.length !== b.length) throw new Error("XOR inputs must have equal length.");
+  if (a.length !== b.length) throw new Error("Panjang kedua masukan XOR harus sama.");
   let out = "";
   for (let i = 0; i < a.length; i++) {
     out += a[i] === b[i] ? "0" : "1";
