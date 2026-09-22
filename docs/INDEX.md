@@ -8,3 +8,4 @@ Registry for all docs/. New records use `NNNN-title-DD-mon-YYYY.md` and must sta
 - 0003 - Tailwind + Iconoir UI Kit - `0003-ui-tailwind-iconoir-22-Sep-2026.md` - status: accepted
 - 0004 - Light Sidebar Indonesia - `0004-light-sidebar-indonesia-22-Sep-2026.md` - status: accepted
 - 0005 - Tokens, Flow, Copy - `0005-tokens-flow-copy-22-Sep-2026.md` - status: accepted
+- 0006 - Governance, Tap Slider, Sidebar - `0006-governance-tap-sidebar-22-Sep-2026.md` - status: accepted

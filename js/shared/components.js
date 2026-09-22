@@ -121,6 +121,21 @@ export function renderStepper(el, steps, emptyNote = "Jalankan dulu untuk meliha
 }
 
 /**
+ * Dual-thumb tap range slider. One control, two tap positions.
+ * @param {number} lo - first tap position
+ * @param {number} hi - second tap position
+ * @param {number} max - highest position (seed length - 1)
+ * @returns {string} slider HTML
+ */
+export function dualRange(lo, hi, max) {
+  return `<div class="dual-range">` +
+    `<div class="dual-track"><div class="dual-fill"></div></div>` +
+    `<input type="range" min="0" max="${max}" step="1" value="${lo}" data-thumb="0" aria-label="Tap bawah">` +
+    `<input type="range" min="0" max="${max}" step="1" value="${hi}" data-thumb="1" aria-label="Tap atas">` +
+    `</div><div class="dual-val font-mono" aria-live="polite">Tap: ${lo}, ${hi}</div>`;
+}
+
+/**
  * Placeholder card for member-owned stub.
  * @param {string} menu - menu name
  * @returns {string} HTML

@@ -1,6 +1,6 @@
 import { encrypt, decrypt } from "./cipher.js";
 import { isBinary } from "../../shared/utils.js";
-import { panel, field, textInput, textArea, btn, bitGrid, flowStrip, wireCopy, renderStepper } from "../../shared/components.js";
+import { panel, field, textInput, textArea, btn, bitGrid, flowStrip, wireCopy, renderStepper, dualRange } from "../../shared/components.js";
 
 /**
  * Render Menu 3 LFSR: kolom alat + kolom keluaran, jejak penuh di bawah.
@@ -17,7 +17,7 @@ export function renderModern1(root) {
       `${field("Teks", textArea("m1-in", "Teks biasa, atau deretan bit untuk dekripsi."))}
       <div class="grid sm:grid-cols-2 gap-4">
         ${field("Seed", textInput("m1-seed", "1011"), "Biner 2-32 bit, jangan nol semua.")}
-        ${field("Tap", textInput("m1-taps", "0,2"), "Angka pisah koma, 0 dari kiri.")}
+        <div class="f-label"><span>Tap</span><div id="m1-taps"></div><span class="f-hint">Geser dua tap, 0 dari kiri.</span></div>
       </div>
       <div id="m1-grid"></div>
       <div class="btn-row">
@@ -40,16 +40,49 @@ export function renderModern1(root) {
         <li><b>Dekripsi = enkripsi ulang.</b> XOR kedua dengan aliran yang sama mengembalikan teks asal.</li>
       </ul>`);
 
-  const parseTaps = (s) => s.split(",").map((x) => x.trim()).filter((x) => x !== "").map(Number);
+  let taps = [0, 2];
+  const maxTap = () => {
+    const seed = root.querySelector("#m1-seed").value.trim();
+    return isBinary(seed) ? seed.length - 1 : 0;
+  };
+  const clampTap = (t, mx) => Math.min(Math.max(0, t | 0), mx);
+  const currentTaps = () => {
+    const mx = maxTap();
+    return [...new Set(taps.map((t) => clampTap(t, mx)))].sort((a, b) => a - b);
+  };
   const paintGrid = () => {
     const seed = root.querySelector("#m1-seed").value.trim();
-    const taps = parseTaps(root.querySelector("#m1-taps").value);
     root.querySelector("#m1-grid").innerHTML =
-      isBinary(seed) ? bitGrid(seed, taps.filter((t) => Number.isInteger(t) && t >= 0 && t < seed.length)) : "";
+      isBinary(seed) ? bitGrid(seed, currentTaps()) : "";
   };
-  root.querySelector("#m1-seed").oninput = paintGrid;
-  root.querySelector("#m1-taps").oninput = paintGrid;
-  paintGrid();
+  const syncDual = () => {
+    const box = root.querySelector("#m1-taps");
+    const mx = maxTap() || 1;
+    const [a, b] = taps;
+    const fill = box.querySelector(".dual-fill");
+    if (fill) {
+      fill.style.left = (Math.min(a, b) / mx * 100) + "%";
+      fill.style.width = (Math.abs(b - a) / mx * 100) + "%";
+    }
+    const val = box.querySelector(".dual-val");
+    if (val) val.textContent = `Tap: ${currentTaps().join(", ")}`;
+    paintGrid();
+  };
+  const paintTaps = () => {
+    const seed = root.querySelector("#m1-seed").value.trim();
+    const box = root.querySelector("#m1-taps");
+    if (!isBinary(seed)) { box.innerHTML = ""; paintGrid(); return; }
+    const mx = Math.max(seed.length - 1, 0);
+    taps = [clampTap(taps[0], mx), clampTap(taps[1] ?? taps[0], mx)];
+    box.innerHTML = dualRange(taps[0], taps[1], mx);
+    box.querySelectorAll('input[type="range"]').forEach((el) => el.oninput = () => {
+      taps[Number(el.dataset.thumb)] = Number(el.value);
+      syncDual();
+    });
+    syncDual();
+  };
+  root.querySelector("#m1-seed").oninput = paintTaps;
+  paintTaps();
 
   const run = (fn) => {
     const out = root.querySelector("#m1-out");
@@ -57,7 +90,7 @@ export function renderModern1(root) {
     try {
       const r = fn(root.querySelector("#m1-in").value, {
         seed: root.querySelector("#m1-seed").value.trim(),
-        taps: parseTaps(root.querySelector("#m1-taps").value)
+        taps: currentTaps()
       });
       out.textContent = r.result === "" ? "(kosong)" : r.result;
       renderStepper(trace, r.steps);

@@ -49,6 +49,14 @@
       "action": "TOKENS_FLOW_COPY",
       "description": "Added DTCG-lite tokens.json and tokens.css, 2-col tool layout, flow strip, sharp minimal copy.",
       "related_dr": "0005"
+    },
+    {
+      "id": 7,
+      "timestamp": "2026-09-22T00:00:00Z",
+      "author": "agent",
+      "action": "GOVERNANCE_TAP_SIDEBAR",
+      "description": "Added README/CONTRIBUTING/CoC, dual-thumb tap slider, text sidebar with localStorage persist and mobile top bar, uniform seed cells, flat flow separators, English JSDoc.",
+      "related_dr": "0006"
     }
   ]
 }
