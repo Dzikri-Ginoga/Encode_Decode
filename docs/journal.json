@@ -9,6 +9,14 @@
       "action": "REPOSITORY_INIT",
       "description": "Defined project specifications, system stack, agent guidelines, and base documentation schema.",
       "related_dr": "0000"
+    },
+    {
+      "id": 2,
+      "timestamp": "2026-09-22T00:00:00Z",
+      "author": "agent",
+      "action": "REPO_PREP",
+      "description": "Fixed _context markdown, added docs INDEX and DR 0001, rewrote AGENTS.md compact.",
+      "related_dr": "0001"
     }
   ]
 }

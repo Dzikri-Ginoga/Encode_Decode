@@ -1,4 +1,9 @@
 ﻿*.pdf
 *.ipynb
 *.csv
-"PRAK. DS/"
+PRAK. DS/
+node_modules/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
