@@ -1,14 +1,14 @@
 /**
  * Shared UI kit v2. DOM helpers only, no cipher math.
- * Kelas mengacu ke token, tidak ada hex di sini.
+ * Classes reference tokens, no hex here.
  * @module shared/components
  */
 import { renderSteps } from "./utils.js";
 
 /**
- * Kartu solid dengan judul dan deskripsi singkat.
- * @param {string} title - judul kartu
- * @param {string} desc - satu kalimat orientasi, boleh kosong
+ * Solid card with title and short description.
+ * @param {string} title - card title
+ * @param {string} desc - one-line orientation, may be empty
  * @param {string} body - inner HTML
  * @returns {string} section HTML
  */
@@ -22,10 +22,10 @@ export function panel(title, desc, body) {
 }
 
 /**
- * Baris input berlabel.
+ * Labeled input row.
  * @param {string} label - label
  * @param {string} input - input HTML
- * @param {string} hint - teks bantu
+ * @param {string} hint - helper text
  * @returns {string} field HTML
  */
 export function field(label, input, hint = "") {
@@ -47,8 +47,8 @@ export const btn = (id, icon, label, primary = true) =>
   `<button id="${id}" class="${primary ? "btn-solid" : "btn-plain"}"><i class="iconoir-${icon}"></i>${label}</button>`;
 
 /**
- * Strip alur ilustratif: Tahap 1 > Tahap 2 > ...
- * @param {Array<[string, string]>} items - pasangan [ikon, label]
+ * Illustrative flow strip: Step 1 > Step 2 > ...
+ * @param {Array<[string, string]>} items - pairs [icon, label]
  * @returns {string} flow HTML
  */
 export function flowStrip(items) {
@@ -58,9 +58,9 @@ export function flowStrip(items) {
 }
 
 /**
- * Bit grid dengan highlight tap untuk tampilan seed LFSR.
- * @param {string} bits - deretan biner
- * @param {number[]} taps - indeks highlight
+ * Bit grid with tap highlight for LFSR seed display.
+ * @param {string} bits - binary string
+ * @param {number[]} taps - highlight indexes
  * @returns {string} grid HTML
  */
 export function bitGrid(bits, taps = []) {
@@ -71,10 +71,10 @@ export function bitGrid(bits, taps = []) {
 }
 
 /**
- * Kabel tombol salin ke elemen keluaran.
+ * Wire copy button to output element.
  * @param {HTMLElement} scope - root view
- * @param {string} btnId - id tombol
- * @param {string} outId - id keluaran
+ * @param {string} btnId - button id
+ * @param {string} outId - output id
  * @returns {void}
  */
 export function wireCopy(scope, btnId, outId) {
@@ -90,10 +90,10 @@ export function wireCopy(scope, btnId, outId) {
 }
 
 /**
- * Stepper di atas array steps dengan kontrol sebelum/berikut.
- * @param {HTMLElement} el - wadah
- * @param {Array<{title: string, detail: string}>} steps - jejak
- * @param {string} emptyNote - teks saat kosong
+ * Stepper over steps array with prev/next controls.
+ * @param {HTMLElement} el - container
+ * @param {Array<{title: string, detail: string}>} steps - trace
+ * @param {string} emptyNote - text when empty
  * @returns {void}
  */
 export function renderStepper(el, steps, emptyNote = "Jalankan dulu untuk melihat langkahnya.") {
@@ -121,8 +121,8 @@ export function renderStepper(el, steps, emptyNote = "Jalankan dulu untuk meliha
 }
 
 /**
- * Kartu placeholder untuk stub milik anggota.
- * @param {string} menu - nama menu
+ * Placeholder card for member-owned stub.
+ * @param {string} menu - menu name
  * @returns {string} HTML
  */
 export function placeholder(menu) {
