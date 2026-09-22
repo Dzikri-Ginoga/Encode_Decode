@@ -110,8 +110,9 @@ body { background: var(--surface-page); }
   font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600;
   background: var(--surface-card); border: 1px solid var(--border-dark); color: var(--text-muted);
 }
-.bit-cell.on { color: var(--action-accent); border-color: var(--action-accent); background: var(--action-accent-wash); }
+.bit-cell.on { background: var(--action-accent); border-color: var(--action-accent); color: var(--surface-card); }
 .bit-cell.tap { border-bottom: 3px solid var(--mark-tap); }
+.bit-cell.on.tap { outline: 2px solid var(--text-faint); outline-offset: 2px; }
 
 .trace-item {
   border: 1px solid var(--border-line); border-left: 3px solid var(--action-accent);
