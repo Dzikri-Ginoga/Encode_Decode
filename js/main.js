@@ -7,11 +7,11 @@ import { renderSuper } from "./modules/super-crypto/view.js";
 
 const routes = {
   home: { render: renderHome, label: "Beranda", icon: "home", live: true },
-  classic1: { render: renderClassic1, label: "Menu 1 - Klasik 1", icon: "key", live: false },
-  classic2: { render: renderClassic2, label: "Menu 2 - Klasik 2", icon: "key", live: false },
-  modern1: { render: renderModern1, label: "Menu 3 - Aliran LFSR", icon: "lock", live: true },
-  modern2: { render: renderModern2, label: "Menu 4 - Modern 2", icon: "cpu", live: false },
-  super: { render: renderSuper, label: "Menu 5 - Super Enkripsi", icon: "layers", live: true }
+  classic1: { render: renderClassic1, label: "Klasik 1", icon: "key", live: false },
+  classic2: { render: renderClassic2, label: "Klasik 2", icon: "key", live: false },
+  modern1: { render: renderModern1, label: "Aliran LFSR", icon: "lock", live: true },
+  modern2: { render: renderModern2, label: "Modern 2", icon: "cpu", live: false },
+  super: { render: renderSuper, label: "Super Enkripsi", icon: "layers", live: true }
 };
 
 const app = document.getElementById("app");

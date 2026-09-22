@@ -41,6 +41,14 @@
       "action": "LIGHT_SIDEBAR_ID",
       "description": "Rewrote light cream theme, collapsible sidebar, Indonesian copy, translated cipher errors.",
       "related_dr": "0004"
+    },
+    {
+      "id": 6,
+      "timestamp": "2026-09-22T00:00:00Z",
+      "author": "agent",
+      "action": "TOKENS_FLOW_COPY",
+      "description": "Added DTCG-lite tokens.json and tokens.css, 2-col tool layout, flow strip, sharp minimal copy.",
+      "related_dr": "0005"
     }
   ]
 }

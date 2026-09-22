@@ -1,16 +1,20 @@
 import { encryptPipeline, decryptPipeline } from "./pipeline.js";
-import { panel, field, textInput, textArea, btn, wireCopy, renderStepper } from "../../shared/components.js";
+import { panel, field, textInput, textArea, btn, flowStrip, wireCopy, renderStepper } from "../../shared/components.js";
 
 /**
- * Render Menu 5 Super Enkripsi on the shared kit.
+ * Render Menu 5 Super Enkripsi: kolom alat + kolom keluaran.
  * @param {HTMLElement} root - container
  * @returns {void}
  */
 export function renderSuper(root) {
   root.innerHTML =
-    panel("01", "Menu 5 - Super Enkripsi", "layers", `
-      <p class="lead">Merangkai Klasik 1 - Klasik 2 - LFSR - Modern 2. Tahap yang aktif saat ini hanya LFSR.</p>
-      ${field("Masukan", textArea("s-in", "Teks biasa untuk enkripsi berantai"))}
+    `<h1 class="display">Empat sandi, satu alur.</h1>
+     <p class="lead" style="margin-bottom:var(--space-section)">Keluaran tiap tahap menjadi masukan tahap berikut. Jejaknya digabung berurutan.</p>` +
+    flowStrip([["key", "Klasik 1"], ["key", "Klasik 2"], ["lock", "LFSR"], ["cpu", "Modern 2"]]) +
+    `<div class="tool-grid" style="margin-top:var(--space-section)">` +
+    panel("Masukkan dan kunci",
+      "Hanya tahap LFSR yang aktif saat ini.",
+      `${field("Teks", textArea("s-in", "Ketik teks biasa."))}
       <div class="grid sm:grid-cols-2 gap-4">
         ${field("Seed LFSR", textInput("s-seed", "1011"))}
         ${field("Tap LFSR", textInput("s-taps", "0,2"))}
@@ -19,10 +23,14 @@ export function renderSuper(root) {
         ${btn("s-enc", "layers", "Enkripsi berantai")}
         ${btn("s-dec", "refresh", "Dekripsi berantai", false)}
       </div>`) +
-    panel("02", "Keluaran", "terminal", `
-      <div class="output font-mono text-sm" id="s-out">-</div>
+    panel("Hasil",
+      "Keluaran tahap terakhir.",
+      `<div class="output font-mono text-sm" id="s-out"><span class="empty">Hasil muncul di sini.</span></div>
       <div class="btn-row">${btn("s-copy", "copy", "Salin", false)}</div>`) +
-    panel("03", "Jejak gabungan", "list", `<div id="s-trace"></div>`);
+    `</div>` +
+    panel("Jejak gabungan",
+      "Per tahap, berurutan.",
+      `<div id="s-trace"><p class="empty">Jalankan dulu untuk melihat langkahnya.</p></div>`);
 
   const keys = () => ({
     classic1: {}, classic2: {}, modern2: {},

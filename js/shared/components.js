@@ -1,32 +1,31 @@
 /**
- * Shared UI kit. DOM helpers only, no cipher math.
- * Solid light theme. All views consume this.
+ * Shared UI kit v2. DOM helpers only, no cipher math.
+ * Kelas mengacu ke token, tidak ada hex di sini.
  * @module shared/components
  */
 import { renderSteps } from "./utils.js";
 
 /**
- * Wrap content in a solid card.
- * @param {string} no - section number, e.g. "01"
- * @param {string} title - heading
- * @param {string} icon - iconoir class suffix
+ * Kartu solid dengan judul dan deskripsi singkat.
+ * @param {string} title - judul kartu
+ * @param {string} desc - satu kalimat orientasi, boleh kosong
  * @param {string} body - inner HTML
  * @returns {string} section HTML
  */
-export function panel(no, title, icon, body) {
+export function panel(title, desc, body) {
   return `
   <section class="card">
-    <p class="sec-no">${no}</p>
-    <h2><i class="iconoir-${icon}"></i>${title}</h2>
+    <h2>${title}</h2>
+    ${desc ? `<p class="lead">${desc}</p>` : ""}
     ${body}
   </section>`;
 }
 
 /**
- * Labeled input row.
- * @param {string} label - field label
+ * Baris input berlabel.
+ * @param {string} label - label
  * @param {string} input - input HTML
- * @param {string} hint - helper text
+ * @param {string} hint - teks bantu
  * @returns {string} field HTML
  */
 export function field(label, input, hint = "") {
@@ -48,9 +47,20 @@ export const btn = (id, icon, label, primary = true) =>
   `<button id="${id}" class="${primary ? "btn-solid" : "btn-plain"}"><i class="iconoir-${icon}"></i>${label}</button>`;
 
 /**
- * Bit grid with tap highlights for LFSR seed display.
- * @param {string} bits - binary string
- * @param {number[]} taps - highlighted indexes
+ * Strip alur ilustratif: Tahap 1 > Tahap 2 > ...
+ * @param {Array<[string, string]>} items - pasangan [ikon, label]
+ * @returns {string} flow HTML
+ */
+export function flowStrip(items) {
+  return `<ol class="flow">` + items.map(([ic, lb], i) =>
+    `${i > 0 ? `<li class="sep" aria-hidden="true">›</li>` : ""}<li><i class="iconoir-${ic}"></i>${lb}</li>`
+  ).join("") + `</ol>`;
+}
+
+/**
+ * Bit grid dengan highlight tap untuk tampilan seed LFSR.
+ * @param {string} bits - deretan biner
+ * @param {number[]} taps - indeks highlight
  * @returns {string} grid HTML
  */
 export function bitGrid(bits, taps = []) {
@@ -61,10 +71,10 @@ export function bitGrid(bits, taps = []) {
 }
 
 /**
- * Copy button wiring for an output element.
- * @param {HTMLElement} scope - view root
- * @param {string} btnId - button id
- * @param {string} outId - output element id
+ * Kabel tombol salin ke elemen keluaran.
+ * @param {HTMLElement} scope - root view
+ * @param {string} btnId - id tombol
+ * @param {string} outId - id keluaran
  * @returns {void}
  */
 export function wireCopy(scope, btnId, outId) {
@@ -80,24 +90,26 @@ export function wireCopy(scope, btnId, outId) {
 }
 
 /**
- * Stepper over a steps array with prev/next controls.
- * @param {HTMLElement} el - container
- * @param {Array<{title: string, detail: string}>} steps - trace
+ * Stepper di atas array steps dengan kontrol sebelum/berikut.
+ * @param {HTMLElement} el - wadah
+ * @param {Array<{title: string, detail: string}>} steps - jejak
+ * @param {string} emptyNote - teks saat kosong
  * @returns {void}
  */
-export function renderStepper(el, steps) {
+export function renderStepper(el, steps, emptyNote = "Jalankan dulu untuk melihat langkahnya.") {
+  if (!steps.length) { el.innerHTML = `<p class="empty">${emptyNote}</p>`; return; }
   let idx = steps.length - 1;
   const draw = () => {
     el.innerHTML = `
       <div class="stepbar">
         <button id="st-prev" class="btn-plain" aria-label="Langkah sebelumnya"><i class="iconoir-arrow-left"></i></button>
-        <span class="pos">Langkah ${steps.length ? idx + 1 : 0} / ${steps.length}</span>
+        <span class="pos">Langkah ${idx + 1} / ${steps.length}</span>
         <button id="st-next" class="btn-plain" aria-label="Langkah berikut"><i class="iconoir-arrow-right"></i></button>
         <button id="st-all" class="link">Tampilkan semua</button>
       </div>
       <div class="trace"></div>`;
     const box = el.querySelector(".trace");
-    renderSteps(box, steps.length ? [steps[idx]] : []);
+    renderSteps(box, [steps[idx]]);
     el.querySelector("#st-prev").onclick = () => { idx = Math.max(0, idx - 1); draw(); };
     el.querySelector("#st-next").onclick = () => { idx = Math.min(steps.length - 1, idx + 1); draw(); };
     el.querySelector("#st-all").onclick = () => {
@@ -109,13 +121,12 @@ export function renderStepper(el, steps) {
 }
 
 /**
- * Placeholder card for member-owned stubs.
- * @param {string} menu - menu name
- * @param {string} owner - owner note
+ * Kartu placeholder untuk stub milik anggota.
+ * @param {string} menu - nama menu
  * @returns {string} HTML
  */
-export function placeholder(menu, owner) {
-  return panel("00", menu, "hammer",
-    `<p class="lead"><i class="iconoir-user"></i> ${owner}</p>
-     <p class="f-hint">Bagian ini menunggu implementasi pemiliknya. Struktur halaman sudah siap.</p>`);
+export function placeholder(menu) {
+  return panel(menu,
+    "Ruang ini milik anggota lain. Struktur halaman sudah siap menunggu cipher-nya.",
+    ``);
 }

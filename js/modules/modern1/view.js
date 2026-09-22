@@ -1,32 +1,45 @@
 import { encrypt, decrypt } from "./cipher.js";
 import { isBinary } from "../../shared/utils.js";
-import { panel, field, textInput, textArea, btn, bitGrid, wireCopy, renderStepper } from "../../shared/components.js";
+import { panel, field, textInput, textArea, btn, bitGrid, flowStrip, wireCopy, renderStepper } from "../../shared/components.js";
 
 /**
- * Render Menu 3 LFSR tab on the shared kit.
+ * Render Menu 3 LFSR: kolom alat + kolom keluaran, jejak penuh di bawah.
  * @param {HTMLElement} root - container
  * @returns {void}
  */
 export function renderModern1(root) {
   root.innerHTML =
-    panel("01", "Menu 3 - Aliran LFSR", "lock", `
-      <p class="lead">LFSR Fibonacci, geser ke kanan, umpan balik dari XOR seluruh tap (indeks 0 dari kiri). Contoh: seed <span class="font-mono">1011</span>, tap <span class="font-mono">0,2</span>.</p>
-      ${field("Masukan", textArea("m1-in", "Teks biasa untuk enkripsi, deretan bit untuk dekripsi"))}
+    `<h1 class="display">Sandi yang mengalir, bukan yang mengacak.</h1>
+     <p class="lead" style="margin-bottom:var(--space-section)">LFSR mengubah teks menjadi bit, lalu menyamarkannya dengan keystream dari seed milikmu.</p>` +
+    flowStrip([["text", "Teks"], ["binary", "Bit"], ["key", "Keystream"], ["lock", "Sandi"]]) +
+    `<div class="tool-grid" style="margin-top:var(--space-section)">` +
+    panel("Masukkan dan kunci",
+      "Isi teks, atur seed dan tap, lalu jalankan.",
+      `${field("Teks", textArea("m1-in", "Ketik di sini. Untuk dekripsi, tempel deretan bit."))}
       <div class="grid sm:grid-cols-2 gap-4">
-        ${field("Seed (biner)", textInput("m1-seed", "1011"), "Panjang 2-32 bit, tidak boleh nol semua.")}
-        ${field("Tap (pisahkan koma)", textInput("m1-taps", "0,2"), "Indeks 0 dari kiri.")}
+        ${field("Seed", textInput("m1-seed", "1011"), "Biner 2-32 bit, jangan nol semua.")}
+        ${field("Tap", textInput("m1-taps", "0,2"), "Angka pisah koma, 0 dari kiri.")}
       </div>
       <div id="m1-grid"></div>
       <div class="btn-row">
         ${btn("m1-enc", "lock", "Enkripsi")}
         ${btn("m1-dec", "unlock", "Dekripsi", false)}
       </div>`) +
-    panel("02", "Keluaran", "terminal", `
-      <div class="output font-mono text-sm" id="m1-out">-</div>
+    panel("Hasil",
+      "Bit sandi siap disalin.",
+      `<div class="output font-mono text-sm" id="m1-out"><span class="empty">Hasil muncul di sini.</span></div>
       <div class="btn-row">${btn("m1-copy", "copy", "Salin", false)}</div>`) +
-    panel("03", "Jejak langkah", "list", `<div id="m1-trace"></div>`) +
-    panel("04", "Tentang sandi ini", "book", `
-      <p class="lead">Setiap karakter diubah menjadi 8 bit. LFSR mengeluarkan satu bit keystream dari sel paling kanan, lalu bergeser dan mengisi sel kiri dengan XOR dari sel-sel tap. Bit sandi = bit biasa XOR keystream. Dekripsi mengulang aliran yang sama, jadi seed dan tap yang sama mengembalikan teks asal.</p>`);
+    `</div>` +
+    panel("Jejak langkah",
+      "Setiap perubahan, berurutan.",
+      `<div id="m1-trace"><p class="empty">Jalankan dulu untuk melihat langkahnya.</p></div>`) +
+    panel("Kenapa ini bekerja",
+      "",
+      `<ul class="about-list">
+        <li><b>Satu bit satu langkah.</b> Tiap karakter jadi 8 bit, tiap bit di-XOR dengan keystream.</li>
+        <li><b>Seed menentukan segalanya.</b> Seed dan tap yang sama selalu menghasilkan keystream yang sama.</li>
+        <li><b>Dekripsi = enkripsi ulang.</b> XOR kedua dengan aliran yang sama mengembalikan teks asal.</li>
+      </ul>`);
 
   const parseTaps = (s) => s.split(",").map((x) => x.trim()).filter((x) => x !== "").map(Number);
   const paintGrid = () => {
@@ -51,7 +64,7 @@ export function renderModern1(root) {
       renderStepper(trace, r.steps);
     } catch (err) {
       out.textContent = "Galat: " + err.message;
-      trace.innerHTML = "";
+      trace.innerHTML = `<p class="empty">Perbaiki masukan, lalu jalankan lagi.</p>`;
     }
   };
   root.querySelector("#m1-enc").onclick = () => run(encrypt);
