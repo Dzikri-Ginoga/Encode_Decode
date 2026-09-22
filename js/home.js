@@ -17,8 +17,7 @@ export function renderHome(root) {
     ["super", "layers", "Super Enkripsi", "Empat tahap dalam satu alur.", true]
   ];
   root.innerHTML = `
-    <h1 class="display">Pahami sandi dengan melihat cara kerjanya.</h1>
-    <p class="lead" style="margin-bottom:var(--space-section)">Lima menu, tiap langkah terlihat. Semua berjalan di peramban.</p>
+    <h1 class="display">KriptoHengker.</h1>
     <div class="btn-row" style="margin:0 0 var(--space-section)">
       <a href="#/modern1" class="btn-solid"><i class="iconoir-play"></i>Coba demo LFSR</a>
     </div>
@@ -34,9 +33,9 @@ export function renderHome(root) {
     <section class="card">
       <h2>Tiga langkah memakai</h2>
       <ol class="about-list">
-        <li><b>Isi.</b> Teks dan kunci, seed dan tap untuk LFSR.</li>
-        <li><b>Jalankan.</b> Enkripsi atau dekripsi.</li>
-        <li><b>Telusuri.</b> Buka jejak langkah satu per satu.</li>
+        <li><b>Isi</b> teks dan kunci.</li>
+        <li><b>Jalankan</b> enkripsi atau dekripsi.</li>
+        <li><b>Telusuri</b> jejak langkah.</li>
       </ol>
     </section>`;
 }

@@ -23,10 +23,15 @@ tabs.innerHTML = Object.entries(routes)
     <i class="iconoir-${r.icon}"></i><span class="lbl">${r.label}</span><span class="dot ${r.live ? "live" : ""}"></span></a>`)
   .join("");
 
-document.getElementById("collapse").onclick = () => {
+const collapseBtn = document.getElementById("collapse");
+collapseBtn.onclick = () => {
   const collapsed = shell.classList.toggle("collapsed");
-  document.querySelector("#collapse i").className =
-    collapsed ? "iconoir-nav-arrow-right" : "iconoir-nav-arrow-left";
+  collapseBtn.setAttribute("aria-expanded", String(!collapsed));
+  collapseBtn.setAttribute("aria-label", collapsed ? "Bentangkan navigasi" : "Ciutkan navigasi");
+  collapseBtn.title = collapsed ? "Bentangkan navigasi" : "Ciutkan navigasi";
+  collapseBtn.innerHTML = collapsed
+    ? `<i class="iconoir-sidebar-expand"></i><span>Bentang</span>`
+    : `<i class="iconoir-sidebar-collapse"></i><span>Ciutkan</span>`;
 };
 
 function current() {

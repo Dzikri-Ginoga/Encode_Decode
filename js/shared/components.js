@@ -126,7 +126,5 @@ export function renderStepper(el, steps, emptyNote = "Jalankan dulu untuk meliha
  * @returns {string} HTML
  */
 export function placeholder(menu) {
-  return panel(menu,
-    "Ruang ini milik anggota lain. Struktur halaman sudah siap menunggu cipher-nya.",
-    ``);
+  return panel(menu, "Milik anggota lain.", ``);
 }

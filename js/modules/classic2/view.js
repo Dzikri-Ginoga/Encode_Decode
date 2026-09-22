@@ -8,11 +8,10 @@ import { panel, field, textArea, btn, placeholder } from "../../shared/component
  */
 export function renderClassic2(root) {
   root.innerHTML =
-    `<h1 class="display">Klasik 2.</h1>
-     <p class="lead" style="margin-bottom:var(--space-section)">Ruang anggota lain. Kerangka siap, cipher menyusul.</p>` +
+    `<h1 class="display">Klasik 2.</h1>` +
     placeholder("Menunggu cipher") +
     panel("Alat",
-      "Jalankan untuk melihat kontrak modul.",
+      "",
       `${field("Teks", textArea("c2-in", "Ketik teks biasa."))}
       <div class="btn-row">${btn("c2-go", "play", "Jalankan")}</div>`) +
     panel("Hasil", "", `<div class="output font-mono text-sm" id="c2-out"><span class="empty">Hasil muncul di sini.</span></div>`);

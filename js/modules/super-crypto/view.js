@@ -8,8 +8,7 @@ import { panel, field, textInput, textArea, btn, flowStrip, wireCopy, renderStep
  */
 export function renderSuper(root) {
   root.innerHTML =
-    `<h1 class="display">Empat sandi, satu alur.</h1>
-     <p class="lead" style="margin-bottom:var(--space-section)">Keluaran tiap tahap menjadi masukan tahap berikut. Jejaknya digabung berurutan.</p>` +
+    `<h1 class="display">Super Enkripsi.</h1>` +
     flowStrip([["key", "Klasik 1"], ["key", "Klasik 2"], ["lock", "LFSR"], ["cpu", "Modern 2"]]) +
     `<div class="tool-grid" style="margin-top:var(--space-section)">` +
     panel("Masukkan dan kunci",
@@ -24,12 +23,12 @@ export function renderSuper(root) {
         ${btn("s-dec", "refresh", "Dekripsi berantai", false)}
       </div>`) +
     panel("Hasil",
-      "Keluaran tahap terakhir.",
+      "",
       `<div class="output font-mono text-sm" id="s-out"><span class="empty">Hasil muncul di sini.</span></div>
       <div class="btn-row">${btn("s-copy", "copy", "Salin", false)}</div>`) +
     `</div>` +
     panel("Jejak gabungan",
-      "Per tahap, berurutan.",
+      "",
       `<div id="s-trace"><p class="empty">Jalankan dulu untuk melihat langkahnya.</p></div>`);
 
   const keys = () => ({

@@ -9,13 +9,12 @@ import { panel, field, textInput, textArea, btn, bitGrid, flowStrip, wireCopy, r
  */
 export function renderModern1(root) {
   root.innerHTML =
-    `<h1 class="display">Sandi yang mengalir, bukan yang mengacak.</h1>
-     <p class="lead" style="margin-bottom:var(--space-section)">LFSR mengubah teks menjadi bit, lalu menyamarkannya dengan keystream dari seed milikmu.</p>` +
+    `<h1 class="display">Aliran LFSR.</h1>` +
     flowStrip([["text", "Teks"], ["binary", "Bit"], ["key", "Keystream"], ["lock", "Sandi"]]) +
     `<div class="tool-grid" style="margin-top:var(--space-section)">` +
     panel("Masukkan dan kunci",
-      "Isi teks, atur seed dan tap, lalu jalankan.",
-      `${field("Teks", textArea("m1-in", "Ketik di sini. Untuk dekripsi, tempel deretan bit."))}
+      "",
+      `${field("Teks", textArea("m1-in", "Teks biasa, atau deretan bit untuk dekripsi."))}
       <div class="grid sm:grid-cols-2 gap-4">
         ${field("Seed", textInput("m1-seed", "1011"), "Biner 2-32 bit, jangan nol semua.")}
         ${field("Tap", textInput("m1-taps", "0,2"), "Angka pisah koma, 0 dari kiri.")}
@@ -26,12 +25,12 @@ export function renderModern1(root) {
         ${btn("m1-dec", "unlock", "Dekripsi", false)}
       </div>`) +
     panel("Hasil",
-      "Bit sandi siap disalin.",
+      "",
       `<div class="output font-mono text-sm" id="m1-out"><span class="empty">Hasil muncul di sini.</span></div>
       <div class="btn-row">${btn("m1-copy", "copy", "Salin", false)}</div>`) +
     `</div>` +
     panel("Jejak langkah",
-      "Setiap perubahan, berurutan.",
+      "",
       `<div id="m1-trace"><p class="empty">Jalankan dulu untuk melihat langkahnya.</p></div>`) +
     panel("Kenapa ini bekerja",
       "",

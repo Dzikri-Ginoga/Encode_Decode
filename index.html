@@ -29,20 +29,20 @@
 <body class="bg-cream text-ink font-sans min-h-screen">
   <div id="shell" class="flex min-h-screen">
     <aside id="sidebar" class="sidebar" aria-label="Navigasi utama">
-      <div class="flex items-center gap-2 px-4 pt-5 pb-4">
+      <div class="brand flex items-center gap-2 px-4 pt-5 pb-4">
         <span class="brand-mark"><i class="iconoir-lock"></i></span>
         <span class="brand-text">
           <strong>KriptoHengker</strong>
           <small>Lab Kriptografi</small>
         </span>
-        <button id="collapse" class="collapse-btn" aria-label="Lipatkan navigasi"><i class="iconoir-nav-arrow-left"></i></button>
       </div>
       <nav id="tabs" class="px-3 space-y-1" aria-label="Menu sandi"></nav>
-      <p class="side-note"><i class="iconoir-shield-check"></i><span>Semua hitungan berjalan di peramban.</span></p>
+      <div class="side-foot">
+        <button id="collapse" class="collapse-btn" aria-label="Ciutkan navigasi" aria-expanded="true" title="Ciutkan navigasi"><i class="iconoir-sidebar-collapse"></i><span>Ciutkan</span></button>
+      </div>
     </aside>
     <div class="flex-1 min-w-0">
       <main id="app" aria-live="polite" class="content"></main>
-      <footer class="content-footer">Demo pembelajaran. Implementasi jejak langkah untuk belajar, bukan untuk kerahasiaan produksi.</footer>
     </div>
   </div>
   <script type="module" src="js/main.js"></script>

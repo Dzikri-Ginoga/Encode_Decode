@@ -18,11 +18,15 @@ body { background: var(--surface-page); }
 .brand-text strong { font-family: var(--font-serif); font-size: 1.05rem; }
 .brand-text small { color: var(--text-muted); font-size: 0.72rem; }
 .collapse-btn {
-  border: 1px solid var(--border-line); background: var(--surface-card);
-  border-radius: var(--radius-sm); width: 1.9rem; height: 1.9rem;
-  cursor: pointer; color: var(--text-muted); flex-shrink: 0;
+  display: flex; align-items: center; gap: var(--space-2);
+  width: 100%; border: 1px solid var(--border-line);
+  background: var(--surface-card); border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3); cursor: pointer;
+  color: var(--text-muted); font-size: 0.8rem; font-weight: 500;
 }
 .collapse-btn:hover { border-color: var(--action-accent); color: var(--action-accent); }
+.collapse-btn i { font-size: 1.1rem; flex-shrink: 0; }
+.side-foot { margin-top: auto; padding: var(--space-4) var(--space-3); border-top: 1px solid var(--border-line); }
 
 #tabs a {
   display: flex; align-items: center; gap: var(--space-3);
@@ -37,23 +41,16 @@ body { background: var(--surface-page); }
 #tabs a .dot { width: 0.45rem; height: 0.45rem; border-radius: var(--radius-full); background: var(--text-faint); margin-left: auto; flex-shrink: 0; }
 #tabs a .dot.live { background: var(--action-accent); }
 
-.side-note {
-  margin-top: auto; padding: var(--space-4);
-  font-size: 0.72rem; color: var(--text-muted);
-  display: flex; gap: var(--space-2); align-items: flex-start;
-  border-top: 1px solid var(--border-line);
-}
-
 #shell.collapsed .sidebar { width: 72px; }
+#shell.collapsed .brand { justify-content: center; }
 #shell.collapsed .brand-text,
-#shell.collapsed #tabs a span.lbl,
-#shell.collapsed .side-note span { display: none; }
+#shell.collapsed #tabs a span.lbl { display: none; }
 #shell.collapsed #tabs a { justify-content: center; padding: var(--space-2) 0; }
 #shell.collapsed #tabs a .dot { display: none; }
-#shell.collapsed .side-note { justify-content: center; }
+#shell.collapsed .collapse-btn { justify-content: center; padding: var(--space-2) 0; }
+#shell.collapsed .collapse-btn span { display: none; }
 
-.content { max-width: 960px; padding: var(--space-8) var(--space-8) var(--space-4); }
-.content-footer { max-width: 960px; padding: 0 var(--space-8) var(--space-10); font-size: 0.75rem; color: var(--text-faint); }
+.content { max-width: 960px; padding: var(--space-8) var(--space-8) var(--space-10); }
 
 .card {
   background: var(--surface-card); border: 1px solid var(--border-line);
@@ -159,8 +156,8 @@ body { background: var(--surface-page); }
   #shell.collapsed #tabs a span.lbl { display: revert; }
   #shell.collapsed #tabs a { padding: var(--space-2) var(--space-3); }
   #collapse { display: none; }
-  .side-note { display: none; }
-  .content, .content-footer { padding-left: var(--space-4); padding-right: var(--space-4); }
+  .side-foot { display: none; }
+  .content { padding-left: var(--space-4); padding-right: var(--space-4); }
 }
 
 @media (prefers-reduced-motion: reduce) {
