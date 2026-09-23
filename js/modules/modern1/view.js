@@ -9,7 +9,7 @@ import { panel, field, textInput, textArea, btn, bitGrid, flowStrip, wireCopy, r
  */
 export function renderModern1(root) {
   root.innerHTML =
-    `<h1 class="display">Aliran LFSR.</h1>` +
+    `<h1 class="display">Stream Cipher + LFSR</h1>` +
     flowStrip([["text", "Teks"], ["binary", "Bit"], ["key", "Keystream"], ["lock", "Sandi"]]) +
     `<div class="tool-grid" style="margin-top:var(--space-section)">` +
     panel("Masukkan dan kunci",

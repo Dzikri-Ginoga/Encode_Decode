@@ -12,7 +12,7 @@ export function renderHome(root) {
   const cards = [
     ["classic1", "key", "Caesar Cipher", "Enkripsi dan dekripsi menggunakan pergeseran huruf.", true],
     ["classic2", "key", "Vignere Cipher", "Enkripsi dan dekripsi menggunakan tabel substitusi.", true],
-    ["modern1", "lock", "Aliran LFSR", "Seed dan tap bisa diatur, jejak per bit.", true],
+    ["modern1", "lock", "Stream Cipher LFSR", "Seed dan tap bisa diatur, jejak per bit.", true],
     ["modern2", "cpu", "Block Chiper S-DES", "Enkripsi berbasis blok dengan kunci tetap, setiap blok diproses secara terpisah untuk menjaga keamanan data.", true],
     ["super", "layers", "Super Enkripsi", "Empat tahap dalam satu alur.", true]
   ];
