@@ -12,7 +12,7 @@ const routes = {
   classic1: { render: renderClassic1, label: "Caesar Cipher", live: true },
   classic2: { render: renderClassic2, label: "Vignere Cipher", live: true },
   modern1: { render: renderModern1, label: "Aliran LFSR", live: true },
-  modern2: { render: renderModern2, label: "Modern 2", live: false },
+  modern2: { render: renderModern2, label: "Block Chiper", live: true },
   super: { render: renderSuper, label: "Super Enkripsi", live: true }
 };
 

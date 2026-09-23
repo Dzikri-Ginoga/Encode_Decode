@@ -13,7 +13,7 @@ export function renderHome(root) {
     ["classic1", "key", "Caesar Cipher", "Enkripsi dan dekripsi menggunakan pergeseran huruf.", true],
     ["classic2", "key", "Vignere Cipher", "Enkripsi dan dekripsi menggunakan tabel substitusi.", true],
     ["modern1", "lock", "Aliran LFSR", "Seed dan tap bisa diatur, jejak per bit.", true],
-    ["modern2", "cpu", "Modern 2", "Ruang anggota lain.", false],
+    ["modern2", "cpu", "Block Chiper S-DES", "Ruang anggota lain.", true],
     ["super", "layers", "Super Enkripsi", "Empat tahap dalam satu alur.", true]
   ];
   root.innerHTML = `
