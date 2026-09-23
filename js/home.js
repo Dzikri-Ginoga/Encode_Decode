@@ -10,8 +10,8 @@
  */
 export function renderHome(root) {
   const cards = [
-    ["classic1", "key", "Klasik 1", "Ruang anggota lain.", false],
-    ["classic2", "key", "Klasik 2", "Ruang anggota lain.", false],
+    ["classic1", "key", "Caesar Cipher", "Enkripsi dan dekripsi menggunakan pergeseran huruf.", true],
+    ["classic2", "key", "Vignere Cipher", "Enkripsi dan dekripsi menggunakan tabel substitusi.", true],
     ["modern1", "lock", "Aliran LFSR", "Seed dan tap bisa diatur, jejak per bit.", true],
     ["modern2", "cpu", "Modern 2", "Ruang anggota lain.", false],
     ["super", "layers", "Super Enkripsi", "Empat tahap dalam satu alur.", true]
