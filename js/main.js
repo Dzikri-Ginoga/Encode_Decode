@@ -10,9 +10,9 @@ const STORE_KEY = "kripto-shell-collapsed";
 const routes = {
   home: { render: renderHome, label: "Beranda", live: true },
   classic1: { render: renderClassic1, label: "Caesar Cipher", live: true },
-  classic2: { render: renderClassic2, label: "Vignere Cipher", live: true },
+  classic2: { render: renderClassic2, label: "Vigenere Cipher", live: true },
   modern1: { render: renderModern1, label: "Aliran LFSR", live: true },
-  modern2: { render: renderModern2, label: "Block Chiper", live: true },
+  modern2: { render: renderModern2, label: "Block Cipher", live: true },
   super: { render: renderSuper, label: "Super Enkripsi", live: true }
 };
 
