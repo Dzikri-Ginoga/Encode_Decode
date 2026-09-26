@@ -1,5 +1,5 @@
 /**
- * Classic1 stub for other member. Pure math placeholder, no DOM.
+ * Classic1 Caesar cipher. Pure math, no DOM.
  * @module modules/classic1/cipher
  */
 
@@ -78,10 +78,10 @@ export function encrypt(input, key){
 
 
 /**
- * Placeholder decrypt.
+ * Algoritma Dekripsi Caesar Cipher
  * @param {string} input - ciphertext
  * @param {object} key - cipher key
- * @returns {{ result: string, steps: Array<{title: string, detail: string}> }} stub result
+ * @returns {{ result: string, steps: Array<{title: string, detail: string}> }} plaintext and trace
  */
 export function decrypt(input, key) {
   const shift = normalisasiShift(key);

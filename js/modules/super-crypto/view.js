@@ -9,7 +9,7 @@ import { panel, field, textInput, textArea, btn, flowStrip, wireCopy, renderStep
 export function renderSuper(root) {
   root.innerHTML =
     `<h1 class="display">Super Enkripsi.</h1>` +
-    flowStrip([["key", "Klasik 1"], ["key", "Klasik 2"], ["lock", "LFSR"], ["cpu", "Modern 2"]]) +
+    flowStrip([["key", "Caesar"], ["key", "Vigenere"], ["lock", "LFSR"], ["cpu", "S-DES"]]) +
     `<div class="tool-grid" style="margin-top:var(--space-section)">` +
     panel("Masukkan dan kunci",
       "Kunci untuk seluruh tahap enkripsi berantai.",
